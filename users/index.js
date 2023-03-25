@@ -14,7 +14,7 @@ app.get('/users/', (req, res) => {
 app.post('/users/', (req, res) => {
   
   // Validator
-  let body = req.body[0]; 
+  let body = req.body; 
   let hasFullName = 'fullName' in body; // body key must contain fullName
   let hasUserName = 'userName' in body; // body key must contain userName
   let hasAddress = 'address' in body; // body key must contain address
@@ -25,7 +25,7 @@ app.post('/users/', (req, res) => {
   if (userNameExist) {
     res.status(400).send(`username ${body.userName} exist, try another one`);
   } else if (checkLength == 3 && hasFullName && hasUserName && hasAddress) {
-    users.push(...req.body);
+    users.push(req.body);
     res.send('New user has been created');
   // throw error if body is not valid
   }  else {
